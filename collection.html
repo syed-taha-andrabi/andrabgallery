@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="description" content="Authentic handmade Kashmiri shawls — Pashmina, Kani, Sozni, Jamawar. Sourced directly from Kashmir craftsmen. Shop in Dubai or order worldwide.">
+<meta name="keywords" content="kashmiri shawl dubai, pashmina shawl, kani shawl, sozni embroidery, authentic kashmir, handmade shawl dubai, luxury shawl, kashmiri pashmina">
+<meta property="og:title" content="Andrab Gallery — Authentic Kashmiri Shawls">
+<meta property="og:description" content="Handmade Kashmiri shawls sourced directly from master craftsmen in Kashmir. Available in Dubai and shipped worldwide.">
+<meta property="og:type" content="website">
+<meta name="robots" content="index, follow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Collection — Andrab Gallery</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,6 +114,11 @@
     footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 24px; }
   }
   @media (max-width: 560px) { .products-grid { grid-template-columns: 1fr; } }
+  .search-wrap { flex: 1; min-width: 200px; max-width: 300px; }
+  .search-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(184,149,90,0.4); padding: 8px 0; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 300; color: var(--charcoal); outline: none; transition: border-color 0.3s; letter-spacing: 0.5px; }
+  .search-input:focus { border-bottom-color: var(--burgundy); }
+  .search-input::placeholder { color: var(--muted); opacity: 0.6; }
+
 </style>
 </head>
 <body>
@@ -115,6 +126,7 @@
 <nav>
   <a href="index.html" class="nav-logo">Andrab Gallery</a>
   <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
     <li><a href="collection.html" class="active">Collection</a></li>
     <li><a href="about.html">Our Story</a></li>
     <li><a href="contact.html">Contact</a></li>
@@ -155,6 +167,10 @@
       <button class="filter-btn" data-size="shawl">Full Shawl</button>
     </div>
   </div>
+  <div class="filter-group" style="flex: 1; max-width: 300px;">
+  <div class="filter-label">Search</div>
+  <input type="text" id="search-input" placeholder="Search by name, type, material..." class="search-input">
+</div>
   <div class="results-count">Showing <span id="count">0</span> pieces</div>
 </div>
 
@@ -259,11 +275,17 @@ function render() {
   const grid = document.getElementById('products-grid');
   grid.querySelectorAll('.product-card').forEach(c => c.remove());
   const noResults = document.getElementById('no-results');
+  const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
 
   const filtered = allProducts.filter(p => {
     const tm = activeType === 'all' || (p.type || '').toLowerCase().trim() === activeType;
     const sm = activeSize === 'all' || getSizeKey(p.size) === activeSize;
-    return tm && sm;
+    const search = searchTerm === '' || 
+      (p.name || '').toLowerCase().includes(searchTerm) ||
+      (p.type || '').toLowerCase().includes(searchTerm) ||
+      (p.material || '').toLowerCase().includes(searchTerm) ||
+      (p.description || '').toLowerCase().includes(searchTerm);
+    return tm && sm && search;
   });
 
   document.getElementById('count').textContent = filtered.length;
@@ -318,6 +340,8 @@ document.querySelectorAll('#size-filters .filter-btn').forEach(btn => {
     render();
   });
 });
+
+document.getElementById('search-input').addEventListener('input', render);
 
 load();
 </script>
