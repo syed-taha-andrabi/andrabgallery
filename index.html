@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kashmir Shawl Co. — Authentic Kashmiri Shawls</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f9f5ef;
+    --warm-white: #fdfaf6;
+    --blush: #e8d5c4;
+    --rose: #c4907a;
+    --deep-rose: #8b5a47;
+    --burgundy: #5c2d2d;
+    --charcoal: #2c2420;
+    --gold: #b8955a;
+    --light-gold: #d4b483;
+    --muted: #8a7567;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--charcoal);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 24px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(253, 250, 246, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184, 149, 90, 0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 48px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-whatsapp {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--warm-white);
+    background: var(--burgundy);
+    padding: 10px 24px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+
+  .nav-whatsapp:hover { background: var(--deep-rose); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+    position: relative;
+  }
+
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--cream) 0%, var(--warm-white) 100%);
+    z-index: -1;
+  }
+
+  .hero-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 6vw, 88px);
+    font-weight: 300;
+    line-height: 1.0;
+    color: var(--burgundy);
+    margin-bottom: 32px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--deep-rose);
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--muted);
+    max-width: 420px;
+    margin-bottom: 56px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--warm-white);
+    background: var(--burgundy);
+    padding: 16px 40px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .btn-primary:hover { background: var(--deep-rose); }
+
+  .btn-secondary {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: gap 0.3s;
+  }
+
+  .btn-secondary::after {
+    content: '→';
+    transition: transform 0.3s;
+  }
+
+  .btn-secondary:hover { gap: 18px; }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--blush);
+  }
+
+  .hero-image-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    background: linear-gradient(160deg, #e8d5c4 0%, #d4b08a 50%, #c4907a 100%);
+    position: relative;
+  }
+
+  .hero-image-placeholder::after {
+    content: 'Your product photo here';
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(92, 45, 45, 0.5);
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 48px;
+    left: -24px;
+    background: var(--warm-white);
+    padding: 24px 32px;
+    border-left: 3px solid var(--gold);
+    box-shadow: 0 20px 60px rgba(92, 45, 45, 0.1);
+  }
+
+  .hero-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--burgundy);
+    line-height: 1;
+  }
+
+  .hero-badge-text {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ===== MARQUEE ===== */
+  .marquee-section {
+    background: var(--burgundy);
+    padding: 18px 0;
+    overflow: hidden;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 60px;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-item {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--light-gold);
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    flex-shrink: 0;
+  }
+
+  .marquee-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ===== ABOUT STRIP ===== */
+  .about-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid rgba(184, 149, 90, 0.2);
+  }
+
+  .about-item {
+    padding: 60px 48px;
+    border-right: 1px solid rgba(184, 149, 90, 0.2);
+    transition: background 0.3s;
+  }
+
+  .about-item:last-child { border-right: none; }
+  .about-item:hover { background: var(--cream); }
+
+  .about-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .about-title {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    margin-bottom: 12px;
+  }
+
+  .about-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  /* ===== COLLECTION ===== */
+  .collection {
+    padding: 120px 80px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 64px;
+  }
+
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    color: var(--burgundy);
+    line-height: 1.1;
+  }
+
+  .section-title em { font-style: italic; }
+
+  .view-all {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--burgundy);
+    transition: gap 0.3s;
+  }
+
+  .view-all:hover { gap: 18px; }
+
+  .collection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .product-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .product-image {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .product-card:hover .product-image { transform: scale(1.04); }
+
+  .product-image-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(92, 45, 45, 0.4);
+    transition: transform 0.6s ease;
+  }
+
+  .product-card:hover .product-image-placeholder { transform: scale(1.04); }
+
+  .product-card:nth-child(1) .product-image-placeholder { background: linear-gradient(160deg, #e8d5c4, #c4907a); }
+  .product-card:nth-child(2) .product-image-placeholder { background: linear-gradient(160deg, #d4c5b0, #b8895a); }
+  .product-card:nth-child(3) .product-image-placeholder { background: linear-gradient(160deg, #c8b8a0, #a07855); }
+
+  .product-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px 28px;
+    background: linear-gradient(transparent, rgba(44, 36, 32, 0.85));
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.4s;
+  }
+
+  .product-card:hover .product-overlay { transform: translateY(0); opacity: 1; }
+
+  .product-info {
+    padding: 24px 0 0;
+  }
+
+  .product-type {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 4px;
+  }
+
+  .product-price {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .product-overlay-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--warm-white);
+    margin-bottom: 12px;
+  }
+
+  .product-overlay-btn {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--warm-white);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    padding-bottom: 4px;
+  }
+
+  /* ===== STORY ===== */
+  .story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+  }
+
+  .story-image {
+    background: linear-gradient(160deg, #c8b090, #a07855, #7a5535);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(253, 250, 246, 0.5);
+  }
+
+  .story-content {
+    padding: 100px 80px;
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .story-content .section-tag { margin-bottom: 20px; }
+
+  .story-content .section-title { margin-bottom: 32px; }
+
+  .story-text {
+    font-size: 15px;
+    line-height: 2;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .story-signature {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-style: italic;
+    color: var(--burgundy);
+    margin-top: 32px;
+  }
+
+  .story-signature-sub {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  /* ===== CRAFTS ===== */
+  .crafts {
+    padding: 120px 80px;
+    text-align: center;
+  }
+
+  .crafts .section-tag { margin-bottom: 16px; }
+  .crafts .section-title { margin-bottom: 16px; }
+
+  .crafts-subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 80px;
+    line-height: 1.8;
+  }
+
+  .crafts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  .craft-item {
+    padding: 48px 32px;
+    background: var(--cream);
+    transition: background 0.3s;
+  }
+
+  .craft-item:hover { background: var(--blush); }
+
+  .craft-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--burgundy);
+    margin-bottom: 12px;
+  }
+
+  .craft-origin {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .craft-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  /* ===== CONTACT ===== */
+  .contact {
+    background: var(--burgundy);
+    padding: 120px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .contact-left .section-tag { color: var(--light-gold); margin-bottom: 20px; }
+
+  .contact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 4vw, 60px);
+    font-weight: 300;
+    color: var(--warm-white);
+    line-height: 1.1;
+    margin-bottom: 32px;
+  }
+
+  .contact-title em { font-style: italic; color: var(--light-gold); }
+
+  .contact-desc {
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(253, 250, 246, 0.6);
+    margin-bottom: 48px;
+  }
+
+  .contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    background: var(--warm-white);
+    padding: 18px 40px;
+    text-decoration: none;
+    transition: background 0.3s;
+    width: fit-content;
+  }
+
+  .btn-whatsapp:hover { background: var(--blush); }
+
+  .btn-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--light-gold);
+    text-decoration: none;
+    width: fit-content;
+    border-bottom: 1px solid rgba(212, 180, 131, 0.4);
+    padding-bottom: 4px;
+    transition: border-color 0.3s;
+  }
+
+  .btn-email:hover { border-color: var(--light-gold); }
+
+  .contact-right {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .contact-detail {
+    border-left: 2px solid var(--gold);
+    padding-left: 28px;
+  }
+
+  .contact-detail-label {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--light-gold);
+    margin-bottom: 8px;
+  }
+
+  .contact-detail-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--warm-white);
+    line-height: 1.4;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--charcoal);
+    padding: 48px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--light-gold);
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: rgba(253, 250, 246, 0.3);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(253, 250, 246, 0.4);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--light-gold); }
+
+  /* ===== ANIMATIONS ===== */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 400px; }
+    .hero-left { padding: 60px 24px; }
+    .about-strip { grid-template-columns: 1fr; }
+    .collection { padding: 80px 24px; }
+    .collection-grid { grid-template-columns: 1fr 1fr; }
+    .story { grid-template-columns: 1fr; }
+    .crafts { padding: 80px 24px; }
+    .crafts-grid { grid-template-columns: 1fr 1fr; }
+    .contact { grid-template-columns: 1fr; padding: 80px 24px; }
+    footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Kashmir Shawl Co.</a>
+  <ul class="nav-links">
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#crafts">Craftsmanship</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://wa.me/YOUR_NUMBER" class="nav-whatsapp">WhatsApp Us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Directly from Kashmir</div>
+    <h1 class="hero-title">
+      Pure.<br>
+      <em>Handwoven.</em><br>
+      Eternal.
+    </h1>
+    <p class="hero-desc">
+      Each shawl carries the soul of Kashmir — woven by master artisans using techniques passed down through generations. From mountain valleys to your hands.
+    </p>
+    <div class="hero-buttons">
+      <a href="#collection" class="btn-primary">Explore Collection</a>
+      <a href="#story" class="btn-secondary">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-image-placeholder">
+      <!-- Replace with: <img src="images/hero.jpg" alt="Kashmiri shawl"> -->
+    </div>
+    <div class="hero-badge">
+      <div class="hero-badge-num">30+</div>
+      <div class="hero-badge-text">Years of craft</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-item">Pashmina <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Kani Weave <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Sozni Embroidery <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Shahtoosh <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Jamawar <span class="marquee-dot"></span></div>
+    <div class="marquee-item">KPAS Certified <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Handwoven in Kashmir <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Pashmina <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Kani Weave <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Sozni Embroidery <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Shahtoosh <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Jamawar <span class="marquee-dot"></span></div>
+    <div class="marquee-item">KPAS Certified <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Handwoven in Kashmir <span class="marquee-dot"></span></div>
+  </div>
+</div>
+
+<!-- ABOUT STRIP -->
+<div class="about-strip">
+  <div class="about-item fade-up">
+    <div class="about-icon">✦</div>
+    <div class="about-title">Source to Hands</div>
+    <p class="about-desc">We work directly with master craftsmen across Kashmir, ensuring every piece is authentically handmade — no middlemen, no compromises.</p>
+  </div>
+  <div class="about-item fade-up">
+    <div class="about-icon">◈</div>
+    <div class="about-title">Dubai Boutique</div>
+    <p class="about-desc">Visit our curated showroom in Dubai where you can feel the softness, see the craftsmanship, and find your perfect piece in person.</p>
+  </div>
+  <div class="about-item fade-up">
+    <div class="about-icon">❋</div>
+    <div class="about-title">Worldwide Delivery</div>
+    <p class="about-desc">Authentic Kashmiri shawls delivered to your door, anywhere in the world. Each piece carefully packaged to preserve its beauty.</p>
+  </div>
+</div>
+
+<!-- COLLECTION -->
+<section class="collection" id="collection">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Handpicked Pieces</div>
+      <h2 class="section-title">The <em>Collection</em></h2>
+    </div>
+    <a href="#contact" class="view-all">Enquire Now →</a>
+  </div>
+  <div class="collection-grid">
+    <div class="product-card fade-up">
+      <div class="product-image-placeholder">Product Photo</div>
+      <div class="product-overlay">
+        <div class="product-overlay-name">Pure Pashmina Shawl</div>
+        <a href="https://wa.me/YOUR_NUMBER" class="product-overlay-btn">Enquire →</a>
+      </div>
+      <div class="product-info">
+        <div class="product-type">Pashmina</div>
+        <div class="product-name">Natural Cream Wrap</div>
+        <div class="product-price">Price on request</div>
+      </div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="product-image-placeholder">Product Photo</div>
+      <div class="product-overlay">
+        <div class="product-overlay-name">Kani Weave Shawl</div>
+        <a href="https://wa.me/YOUR_NUMBER" class="product-overlay-btn">Enquire →</a>
+      </div>
+      <div class="product-info">
+        <div class="product-type">Kani</div>
+        <div class="product-name">Heritage Paisley</div>
+        <div class="product-price">Price on request</div>
+      </div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="product-image-placeholder">Product Photo</div>
+      <div class="product-overlay">
+        <div class="product-overlay-name">Sozni Embroidered</div>
+        <a href="https://wa.me/YOUR_NUMBER" class="product-overlay-btn">Enquire →</a>
+      </div>
+      <div class="product-info">
+        <div class="product-type">Sozni</div>
+        <div class="product-name">Garden of Kashmir</div>
+        <div class="product-price">Price on request</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-image">Your Kashmir photo here</div>
+  <div class="story-content">
+    <div class="section-tag">Our Story</div>
+    <h2 class="section-title">Rooted in <em>Kashmir</em></h2>
+    <p class="story-text">
+      For generations, our family has walked the villages of Kashmir — sitting with weavers, learning their language, understanding the patience that goes into every thread.
+    </p>
+    <p class="story-text">
+      What began as a deep love for our craft became a mission: to bring the most authentic Kashmiri shawls to the world, without losing a single thread of their story.
+    </p>
+    <p class="story-text">
+      Today, from our boutique in Dubai, we connect artisans with collectors who understand that true luxury isn't about price — it's about irreplaceable human craft.
+    </p>
+    <div class="story-signature">Andrab Family</div>
+    <div class="story-signature-sub">Kashmir Shawl Co. — Est. Dubai</div>
+  </div>
+</section>
+
+<!-- CRAFTS -->
+<section class="crafts" id="crafts">
+  <div class="section-tag">Our Specialties</div>
+  <h2 class="section-title">The Art of <em>Kashmir</em></h2>
+  <p class="crafts-subtitle">Each weave tells a different story. Each stitch carries centuries of tradition.</p>
+  <div class="crafts-grid">
+    <div class="craft-item fade-up">
+      <div class="craft-name">Pashmina</div>
+      <div class="craft-origin">Cashmere Goat Wool</div>
+      <p class="craft-desc">The finest natural fibre in the world, hand-spun and woven into shawls so soft they feel like a second skin.</p>
+    </div>
+    <div class="craft-item fade-up">
+      <div class="craft-name">Kani</div>
+      <div class="craft-origin">Loom Woven</div>
+      <p class="craft-desc">Intricate patterns woven directly into the fabric using wooden sticks. Each shawl can take months to complete.</p>
+    </div>
+    <div class="craft-item fade-up">
+      <div class="craft-name">Sozni</div>
+      <div class="craft-origin">Needle Embroidery</div>
+      <p class="craft-desc">Floral motifs embroidered by hand, stitch by stitch. No two pieces are ever exactly the same.</p>
+    </div>
+    <div class="craft-item fade-up">
+      <div class="craft-name">Jamawar</div>
+      <div class="craft-origin">Jacquard Weave</div>
+      <p class="craft-desc">Rich, heavy shawls with complex brocade patterns — traditionally worn by royalty across the subcontinent.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-left">
+    <div class="section-tag">Get in Touch</div>
+    <h2 class="contact-title">Find Your <em>Perfect Piece</em></h2>
+    <p class="contact-desc">
+      Whether you're looking for a specific shawl, want to visit our Dubai boutique, or need help choosing a gift — we're here for you personally.
+    </p>
+    <div class="contact-buttons">
+      <a href="https://wa.me/YOUR_NUMBER" class="btn-whatsapp">
+        💬 WhatsApp Us
+      </a>
+      <a href="mailto:YOUR_EMAIL" class="btn-email">
+        Send an Email →
+      </a>
+    </div>
+  </div>
+  <div class="contact-right">
+    <div class="contact-detail">
+      <div class="contact-detail-label">Dubai Boutique</div>
+      <div class="contact-detail-value">Your shop address<br>Dubai, UAE</div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-detail-label">WhatsApp</div>
+      <div class="contact-detail-value">+971 XX XXX XXXX</div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-detail-label">Instagram</div>
+      <div class="contact-detail-value">@kashmirshawlco</div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-detail-label">Open Hours</div>
+      <div class="contact-detail-value">Sat – Thu, 10am – 9pm</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Kashmir Shawl Co.</div>
+  <div class="footer-copy">© 2026 Kashmir Shawl Co. All rights reserved.</div>
+  <ul class="footer-links">
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
