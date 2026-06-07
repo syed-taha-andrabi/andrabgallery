@@ -620,6 +620,28 @@
     .collection-grid { grid-template-columns: 1fr; }
     .crafts-grid { grid-template-columns: 1fr; }
   }
+  .wa-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  background: #25D366;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.wa-float:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(37, 211, 102, 0.5); }
+.wa-float-icon { font-size: 18px; }
 </style>
 </head>
 <body>
@@ -867,6 +889,9 @@
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
-
+<a href="https://wa.me/YOUR_NUMBER?text=Hello%2C%20I%27d%20like%20to%20enquire%20about%20your%20Kashmiri%20shawls." class="wa-float" target="_blank">
+  <span class="wa-float-icon">💬</span>
+  WhatsApp Us
+</a>
 </body>
 </html>
