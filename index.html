@@ -642,6 +642,24 @@
 }
 .wa-float:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(37, 211, 102, 0.5); }
 .wa-float-icon { font-size: 18px; }
+
+.instagram-section { padding: 100px 80px; background: var(--cream); text-align: center; }
+.insta-header { margin-bottom: 56px; }
+.insta-desc { font-size: 15px; color: var(--muted); margin: 16px auto 32px; max-width: 480px; line-height: 1.8; }
+.insta-btn { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--warm-white); background: var(--burgundy); padding: 14px 36px; text-decoration: none; transition: background 0.3s; }
+.insta-btn:hover { background: var(--deep-rose); }
+.insta-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-top: 48px; }
+.insta-placeholder { aspect-ratio: 1; display: block; transition: opacity 0.3s; opacity: 0.7; }
+.insta-placeholder:hover { opacity: 1; }
+.insta-placeholder:nth-child(1) { background: linear-gradient(160deg, #e8d5c4, #c4907a); }
+.insta-placeholder:nth-child(2) { background: linear-gradient(160deg, #d4c0a8, #a07855); }
+.insta-placeholder:nth-child(3) { background: linear-gradient(160deg, #c8b8a0, #8a6545); }
+.insta-placeholder:nth-child(4) { background: linear-gradient(160deg, #b8a090, #6a3a2a); }
+.insta-placeholder:nth-child(5) { background: linear-gradient(160deg, #ddd0b8, #b89060); }
+.insta-placeholder:nth-child(6) { background: linear-gradient(160deg, #c8b090, #8a6030); }
+@media (max-width: 768px) { .instagram-section { padding: 60px 20px; } .insta-grid { grid-template-columns: repeat(3, 1fr); } }
+
+
 </style>
 </head>
 <body>
@@ -861,6 +879,24 @@
     <li><a href="about.html">Our Story</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
+
+  <section class="instagram-section">
+  <div class="insta-header">
+    <div class="section-tag">Follow Our Journey</div>
+    <h2 class="section-title">Find us on <em>Instagram</em></h2>
+    <p class="insta-desc">Behind the scenes from Kashmir — the weavers, the craft, the mountains.</p>
+    <a href="https://www.instagram.com/_andrabgallery" target="_blank" class="insta-btn">Follow @_andrabgallery</a>
+  </div>
+  <div class="insta-grid">
+    <a href="https://www.instagram.com/_andrabgallery" target="_blank" class="insta-placeholder"></a>
+    <a href="https://www.instagram.com/_andrabgallery" target="_blank" class="insta-placeholder"></a>
+    <a href="https://www.instagram.com/_andrabgallery" target="_blank" class="insta-placeholder"></a>
+    <a href="https://www.instagram.com/_andrabgallery" target="_blank" class="insta-placeholder"></a>
+    <a href="https://www.instagram.com/_andrabgallery" target="_blank" class="insta-placeholder"></a>
+    <a href="https://www.instagram.com/_andrabgallery" target="_blank" class="insta-placeholder"></a>
+  </div>
+</section>
+
 </footer>
 
 <script>
