@@ -659,6 +659,102 @@
 .insta-placeholder:nth-child(6) { background: linear-gradient(160deg, #c8b090, #8a6030); }
 @media (max-width: 768px) { .instagram-section { padding: 60px 20px; } .insta-grid { grid-template-columns: repeat(3, 1fr); } }
 
+/* ===== REVIEWS ===== */
+.reviews-section {
+  padding: 100px 80px;
+  background: var(--warm-white);
+  display: none;
+}
+
+.reviews-section.loaded {
+  display: block;
+}
+
+.reviews-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.review-card {
+  background: var(--cream);
+  padding: 44px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background 0.3s;
+}
+
+.review-card:hover {
+  background: var(--blush);
+}
+
+.review-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--charcoal);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.review-quote::before {
+  content: '"';
+  font-size: 48px;
+  color: var(--gold);
+  line-height: 0;
+  vertical-align: -18px;
+  margin-right: 4px;
+  font-style: normal;
+}
+
+.review-footer {
+  border-top: 1px solid rgba(184, 149, 90, 0.2);
+  padding-top: 20px;
+}
+
+.review-name {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  margin-bottom: 5px;
+}
+
+.review-meta {
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.review-meta-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .reviews-section {
+    padding: 60px 20px;
+  }
+  .reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  .review-quote {
+    font-size: 17px;
+  }
+}
 
 </style>
 </head>
@@ -841,6 +937,17 @@
   </div>
 </section>
 
+<!-- REVIEWS SECTION -->
+<section class="reviews-section" id="reviews">
+  <div class="reviews-inner">
+    <div class="reviews-header">
+      <div class="section-tag">From Our Customers</div>
+      <h2 class="section-title">What They <em>Say</em></h2>
+    </div>
+    <div class="reviews-grid" id="reviews-grid"></div>
+  </div>
+</section>
+
 <section class="contact" id="contact">
   <div class="contact-left">
     <div class="section-tag">Get in Touch</div>
@@ -924,6 +1031,59 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  
+  // ===== REVIEWS =====
+(function loadReviews() {
+  const SHEET_ID = '119pVriCZZy74IZ3zrR-pnLtm5y3XZRYixoWJ3DNKVHI';
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=reviews`;
+
+  fetch(url)
+    .then(res => res.text())
+    .then(text => {
+      const clean = text.replace(/^[^{]*/, '').replace(/[^}]*$/, '');
+      const json = JSON.parse(clean);
+      const rows = (json.table.rows || []);
+
+      if (rows.length === 0) return; // no reviews yet — section stays hidden
+
+      const reviews = rows.map(row => ({
+        name:       row.c[0]?.v || '',
+        location:   row.c[1]?.v || '',
+        shawl_type: row.c[2]?.v || '',
+        date:       row.c[3]?.v || '',
+        review:     row.c[4]?.v || ''
+      })).filter(r => r.name && r.review);
+
+      if (reviews.length === 0) return;
+
+      const grid = document.getElementById('reviews-grid');
+      reviews.forEach(r => {
+        const meta = [r.location, r.shawl_type, r.date].filter(Boolean);
+        grid.insertAdjacentHTML('beforeend', `
+          <div class="review-card fade-up">
+            <div class="review-quote">${r.review}</div>
+            <div class="review-footer">
+              <div class="review-name">${r.name}</div>
+              <div class="review-meta">
+                ${meta.map((m, i) => 
+                  i === 0 
+                    ? `<span>${m}</span>` 
+                    : `<span class="review-meta-dot"></span><span>${m}</span>`
+                ).join('')}
+              </div>
+            </div>
+          </div>
+        `);
+      });
+
+      document.querySelector('.reviews-section').classList.add('loaded');
+
+      // trigger fade-up observer on new cards
+      document.querySelectorAll('.review-card.fade-up').forEach(el => observer.observe(el));
+    })
+    .catch(() => {}); // fail silently — section just stays hidden
+})();
+
 </script>
 <a href="https://wa.me/YOUR_NUMBER?text=Hello%2C%20I%27d%20like%20to%20enquire%20about%20your%20Kashmiri%20shawls." class="wa-float" target="_blank">
   <span class="wa-float-icon">💬</span>
