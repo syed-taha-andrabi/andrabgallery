@@ -207,6 +207,35 @@
 .wa-float:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(37, 211, 102, 0.5); }
 .wa-float-icon { font-size: 18px; }
 
+.back-to-top {
+  position: fixed;
+  bottom: 100px;
+  right: 28px;
+  z-index: 9997;
+  background: var(--burgundy);
+  color: var(--warm-white);
+  border: none;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px);
+}
+
 </style>
 </head>
 <body>
@@ -441,6 +470,12 @@
   </ul>
 </footer>
 
+<a href="https://wa.me/YOUR_NUMBER?text=Hello%2C%20I%27d%20like%20to%20enquire%20about%20your%20Kashmiri%20shawls." class="wa-float" target="_blank">
+  <span class="wa-float-icon">💬</span>
+  WhatsApp Us
+</a>
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
+
 <script>
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -476,10 +511,12 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+const backBtn = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => backBtn.classList.toggle('visible', window.scrollY > 100));
+backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
 </script>
-<a href="https://wa.me/YOUR_NUMBER?text=Hello%2C%20I%27d%20like%20to%20enquire%20about%20your%20Kashmiri%20shawls." class="wa-float" target="_blank">
-  <span class="wa-float-icon">💬</span>
-  WhatsApp Us
-</a>
+
 </body>
 </html>
