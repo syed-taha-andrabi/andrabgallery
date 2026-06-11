@@ -88,7 +88,7 @@
   .page-tag::before { content: ''; width: 40px; height: 1px; background: var(--light-gold); }
   .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 5vw, 72px); font-weight: 300; color: var(--warm-white); line-height: 1.05; margin-bottom: 28px; }
   .page-title em { font-style: italic; color: var(--light-gold); }
-  .page-desc { font-size: 15px; line-height: 2; color: rgba(253,250,246,0.6); }
+  .page-desc { font-size: 15px; line-height: 1.9; color: rgba(253,250,246,0.6); }
   .header-right { display: flex; flex-direction: column; gap: 28px; }
   .header-detail { border-left: 2px solid var(--gold); padding-left: 22px; }
   .header-detail-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--light-gold); margin-bottom: 7px; }
@@ -123,9 +123,9 @@
   .form-note { font-size: 11px; color: var(--muted); margin-top: 14px; text-align: center; line-height: 1.6; }
   .form-success { display: none; text-align: center; padding: 40px; }
   .form-success.visible { display: block; }
-  .success-icon { font-family: 'Cormorant Garamond', serif; font-size: 44px; color: var(--gold); margin-bottom: 14px; }
+  .success-icon { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 20px; }
   .success-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--burgundy); margin-bottom: 10px; }
-  .success-text { font-size: 14px; color: var(--muted); line-height: 1.8; }
+  .success-text { font-size: 14px; color: var(--muted); line-height: 1.9; }
 
   /* INFO — deep charcoal linen */
   .info-side {
@@ -159,9 +159,9 @@
   .wa-btn:hover { background: #1da851; }
   .wa-features { display: flex; flex-direction: column; gap: 22px; }
   .wa-feature { display: flex; align-items: flex-start; gap: 18px; }
-  .wa-feature-icon { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--gold); flex-shrink: 0; line-height: 1; }
+  .wa-feature-icon { width: 24px; height: 1px; background: var(--gold); flex-shrink: 0; margin-top: 8px; }
   .wa-feature-title { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--burgundy); margin-bottom: 5px; }
-  .wa-feature-text { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .wa-feature-text { font-size: 14px; color: var(--muted); line-height: 1.9; }
 
   /* MAP — darkest linen */
   .map-section {
@@ -172,7 +172,7 @@
     display: flex; align-items: center; justify-content: center;
     flex-direction: column; gap: 14px; position: relative;
   }
-  .map-pin { font-family: 'Cormorant Garamond', serif; font-size: 44px; color: var(--gold); }
+  .map-pin { color: var(--gold); display: flex; }
   .map-address { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(253,250,246,0.5); text-align: center; line-height: 1.8; }
   .map-link { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--light-gold); text-decoration: none; border-bottom: 1px solid rgba(212,180,131,0.4); padding-bottom: 3px; margin-top: 6px; }
 
@@ -243,6 +243,9 @@
     footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 20px; }
     .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
   }
+
+  nav { transition: padding 0.35s ease, box-shadow 0.35s ease; }
+  nav.scrolled { padding-top: 12px; padding-bottom: 12px; box-shadow: 0 8px 30px rgba(44,36,32,0.07); }
 </style>
 </head>
 <body>
@@ -355,7 +358,7 @@
       <p class="form-note">We typically respond within a few hours on WhatsApp or email.</p>
     </form>
     <div class="form-success" id="form-success">
-      <div class="success-icon">✦</div>
+      <div class="success-icon"></div>
       <div class="success-title">Thank you for reaching out</div>
       <p class="success-text">We've received your enquiry and will be in touch shortly. Feel free to WhatsApp us directly for a faster response.</p>
     </div>
@@ -405,21 +408,21 @@
   </div>
   <div class="wa-features">
     <div class="wa-feature fade-up">
-      <div class="wa-feature-icon">◈</div>
+      <div class="wa-feature-icon"></div>
       <div>
         <div class="wa-feature-title">Personal Service</div>
         <p class="wa-feature-text">Chat directly with our founder — not a chatbot. Get honest advice on which shawl suits you best.</p>
       </div>
     </div>
     <div class="wa-feature fade-up">
-      <div class="wa-feature-icon">✦</div>
+      <div class="wa-feature-icon"></div>
       <div>
         <div class="wa-feature-title">Share Your Vision</div>
         <p class="wa-feature-text">Send us photos, describe an occasion, share a colour — we'll find or create the perfect match.</p>
       </div>
     </div>
     <div class="wa-feature fade-up">
-      <div class="wa-feature-icon">❋</div>
+      <div class="wa-feature-icon"></div>
       <div>
         <div class="wa-feature-title">Worldwide Shipping</div>
         <p class="wa-feature-text">We ship to any country. Ask us about delivery timelines, packaging, and how we keep your shawl safe in transit.</p>
@@ -429,7 +432,7 @@
 </section>
 
 <div class="map-section">
-  <div class="map-pin">◈</div>
+  <div class="map-pin"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
   <div class="map-address">Your Shop Name<br>Dubai, United Arab Emirates</div>
   <a href="YOUR_GOOGLE_MAPS_LINK" class="map-link" target="_blank">Open in Google Maps →</a>
 </div>
@@ -526,6 +529,12 @@
   const backBtn = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => backBtn.classList.toggle('visible', window.scrollY > 400));
   backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Nav condense on scroll
+  const siteNav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    siteNav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
 </script>
 
 </body>

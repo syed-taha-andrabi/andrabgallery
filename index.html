@@ -357,6 +357,7 @@
   .marquee-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
 
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee-section:hover .marquee-track { animation-play-state: paused; }
 
   /* ===== ABOUT STRIP ===== */
   .about-strip {
@@ -377,9 +378,9 @@
   .about-item:last-child { border-right: none; }
   .about-item:hover { background-color: #ede5d8; }
 
-  .about-icon { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--gold); margin-bottom: 16px; }
+  .about-icon { width: 32px; height: 1px; background: var(--gold); margin-bottom: 22px; }
   .about-title { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--burgundy); margin-bottom: 12px; }
-  .about-desc { font-size: 14px; line-height: 1.8; color: var(--muted); }
+  .about-desc { font-size: 14px; line-height: 1.9; color: var(--muted); }
 
   /* ===== COLLECTION ===== */
   .collection {
@@ -501,7 +502,7 @@
 
   .story-content .section-tag { margin-bottom: 18px; }
   .story-content .section-title { margin-bottom: 28px; }
-  .story-text { font-size: 15px; line-height: 2; color: var(--muted); margin-bottom: 16px; }
+  .story-text { font-size: 15px; line-height: 1.9; color: var(--muted); margin-bottom: 16px; }
   .story-signature { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-style: italic; color: var(--burgundy); margin-top: 28px; }
   .story-signature-sub { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
 
@@ -521,7 +522,7 @@
     color: var(--muted);
     max-width: 480px;
     margin: 0 auto 72px;
-    line-height: 1.8;
+    line-height: 1.9;
   }
 
   .crafts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
@@ -536,7 +537,7 @@
   .craft-item:hover { background-color: #e8d5c4; }
   .craft-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: var(--burgundy); margin-bottom: 10px; }
   .craft-origin { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-  .craft-desc { font-size: 13px; line-height: 1.8; color: var(--muted); }
+  .craft-desc { font-size: 14px; line-height: 1.9; color: var(--muted); }
 
   /* ===== REVIEWS ===== */
   .reviews-section {
@@ -661,7 +662,7 @@
     text-align: center;
   }
   .insta-header { margin-bottom: 56px; }
-  .insta-desc { font-size: 15px; color: var(--muted); margin: 16px auto 32px; max-width: 480px; line-height: 1.8; }
+  .insta-desc { font-size: 15px; color: var(--muted); margin: 16px auto 32px; max-width: 480px; line-height: 1.9; }
   .insta-btn { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--warm-white); background: var(--burgundy); padding: 14px 36px; text-decoration: none; transition: background 0.3s; }
   .insta-btn:hover { background: var(--deep-rose); }
   .insta-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-top: 48px; }
@@ -795,6 +796,18 @@
     .collection-grid { grid-template-columns: 1fr; }
     .crafts-grid { grid-template-columns: 1fr; }
   }
+
+  nav { transition: padding 0.35s ease, box-shadow 0.35s ease; }
+  nav.scrolled { padding-top: 12px; padding-bottom: 12px; box-shadow: 0 8px 30px rgba(44,36,32,0.07); }
+
+  /* 3D tilt */
+  .collection-grid { perspective: 1200px; }
+  .product-card { transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s; will-change: transform; }
+  .product-card.tilting { transition: transform 0.08s linear; }
+  @media (prefers-reduced-motion: reduce) {
+    .product-card, .hero-image-parallax { transform: none !important; transition: none !important; }
+    .marquee-track { animation: none; }
+  }
 </style>
 </head>
 <body>
@@ -871,17 +884,17 @@
 
 <div class="about-strip">
   <div class="about-item fade-up">
-    <div class="about-icon">✦</div>
+    <div class="about-icon"></div>
     <div class="about-title">Source to Hands</div>
     <p class="about-desc">We work directly with master craftsmen across Kashmir, ensuring every piece is authentically handmade — no middlemen, no compromises.</p>
   </div>
   <div class="about-item fade-up">
-    <div class="about-icon">◈</div>
+    <div class="about-icon"></div>
     <div class="about-title">Dubai Boutique</div>
     <p class="about-desc">Visit our curated showroom in Dubai where you can feel the softness, see the craftsmanship, and find your perfect piece in person.</p>
   </div>
   <div class="about-item fade-up">
-    <div class="about-icon">❋</div>
+    <div class="about-icon"></div>
     <div class="about-title">Worldwide Delivery</div>
     <p class="about-desc">Authentic Kashmiri shawls delivered to your door, anywhere in the world. Each piece carefully packaged to preserve its beauty.</p>
   </div>
@@ -992,7 +1005,7 @@
     <h2 class="contact-title">Find Your <em>Perfect Piece</em></h2>
     <p class="contact-desc">Whether you're looking for a specific shawl, want to visit our Dubai boutique, or need help choosing a gift — we're here for you personally.</p>
     <div class="contact-buttons">
-      <a href="https://wa.me/YOUR_NUMBER" class="btn-whatsapp">💬 WhatsApp Us</a>
+      <a href="https://wa.me/YOUR_NUMBER" class="btn-whatsapp">WhatsApp Us</a>
       <a href="mailto:YOUR_EMAIL" class="btn-email">Send an Email →</a>
     </div>
   </div>
@@ -1133,6 +1146,42 @@
   const backBtn = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => backBtn.classList.toggle('visible', window.scrollY > 400));
   backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Nav condense on scroll
+  const siteNav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    siteNav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // 3D card tilt (desktop, fine pointers only)
+  if (window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.classList.add('tilting');
+        card.style.transform = `rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('tilting');
+        card.style.transform = '';
+      });
+    });
+
+    // Hero image parallax
+    const heroRight = document.querySelector('.hero-right');
+    if (heroRight) {
+      const inner = heroRight.querySelector('.hero-image-placeholder, img');
+      if (inner) {
+        inner.classList.add('hero-image-parallax');
+        window.addEventListener('scroll', () => {
+          const sc = window.scrollY;
+          if (sc < window.innerHeight) inner.style.transform = `translateY(${sc * 0.12}px) scale(1.06)`;
+        }, { passive: true });
+      }
+    }
+  }
 </script>
 
 </body>

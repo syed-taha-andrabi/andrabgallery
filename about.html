@@ -90,7 +90,7 @@
   .page-tag::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
   .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 5vw, 72px); font-weight: 300; color: var(--burgundy); line-height: 1.05; margin-bottom: 28px; }
   .hero-title em { font-style: italic; }
-  .hero-text { font-size: 15px; line-height: 2; color: var(--muted); margin-bottom: 16px; }
+  .hero-text { font-size: 15px; line-height: 1.9; color: var(--muted); margin-bottom: 16px; }
   .hero-image { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
   .hero-image-placeholder { width: 100%; aspect-ratio: 4/5; background: linear-gradient(160deg, #c8b090, #8a6030); display: flex; align-items: center; justify-content: center; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(253,250,246,0.4); }
 
@@ -130,7 +130,7 @@
   .story-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
   .story-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3vw, 44px); font-weight: 300; color: var(--burgundy); line-height: 1.1; margin-bottom: 24px; }
   .story-title em { font-style: italic; }
-  .story-text { font-size: 14px; line-height: 2; color: var(--muted); margin-bottom: 16px; }
+  .story-text { font-size: 14px; line-height: 1.9; color: var(--muted); margin-bottom: 16px; }
 
   /* VALUES */
   .values {
@@ -152,7 +152,7 @@
     transition: background-color 0.3s;
   }
   .value-item:hover { background-color: #e8d5c4; }
-  .value-icon { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: var(--gold); margin-bottom: 20px; }
+  .value-icon { width: 32px; height: 1px; background: var(--gold); margin-bottom: 24px; }
   .value-title { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--burgundy); margin-bottom: 14px; }
   .value-text { font-size: 14px; line-height: 1.9; color: var(--muted); }
 
@@ -196,7 +196,7 @@
   }
   .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 56px); font-weight: 300; color: var(--warm-white); margin-bottom: 20px; }
   .cta-title em { font-style: italic; color: var(--light-gold); }
-  .cta-text { font-size: 15px; color: rgba(253,250,246,0.5); margin-bottom: 44px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+  .cta-text { font-size: 15px; color: rgba(253,250,246,0.5); margin-bottom: 44px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.9; }
   .cta-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
   .btn-light { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--charcoal); background: var(--warm-white); padding: 16px 40px; text-decoration: none; transition: background 0.3s; }
   .btn-light:hover { background: var(--blush); }
@@ -262,6 +262,9 @@
     footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 20px; }
     .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
   }
+
+  nav { transition: padding 0.35s ease, box-shadow 0.35s ease; }
+  nav.scrolled { padding-top: 12px; padding-bottom: 12px; box-shadow: 0 8px 30px rgba(44,36,32,0.07); }
 </style>
 </head>
 <body>
@@ -346,17 +349,17 @@
   </div>
   <div class="values-grid">
     <div class="value-item fade-up">
-      <div class="value-icon">✦</div>
+      <div class="value-icon"></div>
       <div class="value-title">Authenticity</div>
       <p class="value-text">Every piece we sell is genuinely handmade in Kashmir. We visit the craftsmen ourselves, ensuring no shortcuts and no compromises on quality.</p>
     </div>
     <div class="value-item fade-up">
-      <div class="value-icon">◈</div>
+      <div class="value-icon"></div>
       <div class="value-title">Craftsmanship</div>
       <p class="value-text">We believe in the value of human hands. Machine-made imitations flood the market — we exist to offer something different, something irreplaceable.</p>
     </div>
     <div class="value-item fade-up">
-      <div class="value-icon">❋</div>
+      <div class="value-icon"></div>
       <div class="value-title">Fair Trade</div>
       <p class="value-text">We pay our artisans fairly and work with them directly. When you buy from us, you support a family in Kashmir, not a factory.</p>
     </div>
@@ -454,6 +457,12 @@
   const backBtn = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => backBtn.classList.toggle('visible', window.scrollY > 400));
   backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Nav condense on scroll
+  const siteNav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    siteNav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
 </script>
 
 </body>

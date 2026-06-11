@@ -99,7 +99,7 @@
 
   /* FILTER BAR */
   .filter-section {
-    position: sticky; top: 72px; z-index: 100;
+    position: sticky; top: 72px; z-index: 100; transition: top 0.35s ease;
     background-color: rgba(232,218,190,0.98);
     background-image: url('texture.png');
     background-blend-mode: soft-light;
@@ -280,6 +280,17 @@
     .back-to-top { bottom: 90px; right: 20px; }
   }
   @media (max-width: 400px) { .products-grid { grid-template-columns: 1fr; } .loading { grid-template-columns: 1fr; } }
+
+  nav { transition: padding 0.35s ease, box-shadow 0.35s ease; }
+  nav.scrolled { padding-top: 12px; padding-bottom: 12px; box-shadow: 0 8px 30px rgba(44,36,32,0.07); }
+  nav.scrolled ~ .filter-section { top: 56px; }
+  @media (max-width: 768px) { nav.scrolled ~ .filter-section { top: 50px; } }
+
+  /* 3D tilt */
+  .products-grid { perspective: 1400px; }
+  .product-card { transform-style: preserve-3d; will-change: transform; }
+  .product-card.tilting { transition: transform 0.08s linear !important; }
+  @media (prefers-reduced-motion: reduce) { .product-card { transform: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
@@ -332,7 +343,7 @@
 <div class="filter-section" id="filter-section">
   <div class="filter-topbar" id="filter-topbar">
     <button class="filter-toggle" id="filter-toggle">
-      ⊕ Filter & Sort <span class="filter-toggle-arrow">▼</span>
+      Filter & Sort <span class="filter-toggle-arrow">▾</span>
     </button>
     <div class="filter-active-tags" id="filter-active-tags"></div>
     <div class="results-count">Showing <span id="count">0</span> pieces</div>
@@ -725,6 +736,33 @@ function closeMenu() {
 }
 
 load();
+
+  // Nav condense on scroll
+  const siteNav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    siteNav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Delegated 3D tilt — works for dynamically rendered cards
+  if (window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const grid = document.getElementById('products-grid');
+    grid.addEventListener('mousemove', e => {
+      const card = e.target.closest('.product-card');
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.classList.add('tilting');
+      card.style.transform = `rotateY(${x * 5}deg) rotateX(${-y * 5}deg) translateY(-3px)`;
+    });
+    grid.addEventListener('mouseout', e => {
+      const card = e.target.closest('.product-card');
+      if (card && !card.contains(e.relatedTarget)) {
+        card.classList.remove('tilting');
+        card.style.transform = '';
+      }
+    });
+  }
 </script>
 </body>
 </html>
