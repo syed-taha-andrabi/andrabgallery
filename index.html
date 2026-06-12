@@ -808,6 +808,31 @@
     .product-card, .hero-image-parallax { transform: none !important; transition: none !important; }
     .marquee-track { animation: none; }
   }
+
+  /* ===== FOOTER — garment label ===== */
+  .site-footer { display: block; background: var(--charcoal); padding: 88px 80px 36px; }
+  .footer-label { text-align: center; padding-bottom: 52px; border-bottom: 1px solid rgba(212,180,131,0.14); margin-bottom: 56px; }
+  .footer-wordmark { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; letter-spacing: 7px; text-transform: uppercase; color: var(--light-gold); margin-bottom: 14px; }
+  .footer-provenance { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; color: rgba(253,250,246,0.42); }
+  .footer-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 720px; margin: 0 auto 64px; text-align: center; }
+  .footer-col { display: flex; flex-direction: column; gap: 13px; }
+  .footer-col-title { font-size: 9px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .footer-col a, .footer-col span { font-size: 12px; letter-spacing: 1px; color: rgba(253,250,246,0.55); text-decoration: none; transition: color 0.3s; }
+  .footer-col a:hover { color: var(--light-gold); }
+  .footer-base { display: flex; justify-content: space-between; align-items: center; padding-top: 26px; border-top: 1px solid rgba(212,180,131,0.14); flex-wrap: wrap; gap: 14px; }
+  .footer-legal-copy { font-size: 10px; letter-spacing: 1px; color: rgba(253,250,246,0.3); }
+  .footer-legal-links { display: flex; gap: 28px; }
+  .footer-legal-links a { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(253,250,246,0.35); text-decoration: none; transition: color 0.3s; }
+  .footer-legal-links a:hover { color: var(--light-gold); }
+  @media (max-width: 768px) {
+    .site-footer { padding: 56px 24px 28px; }
+    .footer-columns { grid-template-columns: 1fr; gap: 36px; margin-bottom: 48px; }
+    .footer-base { flex-direction: column; text-align: center; }
+  }
+
+  /* ===== refinements ===== */
+  ::selection { background: var(--burgundy); color: var(--cream); }
+  a:focus-visible, button:focus-visible { outline: 1px solid var(--gold); outline-offset: 3px; }
 </style>
 </head>
 <body>
@@ -1046,16 +1071,39 @@
   </div>
 </section>
 
-<footer>
-  <div class="footer-logo">
-    <img src="logo.png" alt="Andrab Gallery">
+<footer class="site-footer">
+  <div class="footer-label">
+    <div class="footer-wordmark">Andrab Gallery</div>
+    <div class="footer-provenance">Woven in Kashmir. Found in Dubai.</div>
   </div>
-  <div class="footer-copy">© 2026 Andrab Gallery. All rights reserved.</div>
-  <ul class="footer-links">
-    <li><a href="collection.html">Collection</a></li>
-    <li><a href="about.html">Our Story</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
+  <div class="footer-columns">
+    <div class="footer-col">
+      <div class="footer-col-title">Explore</div>
+      <a href="index.html">Home</a>
+      <a href="collection.html">Collection</a>
+      <a href="about.html">Our Story</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Boutique</div>
+      <span>Dubai, United Arab Emirates</span>
+      <span>Sat &ndash; Thu, 10am &ndash; 9pm</span>
+      <span>Friday, 2pm &ndash; 9pm</span>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Connect</div>
+      <a href="https://wa.me/YOUR_NUMBER" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://www.instagram.com/_andrabgallery" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:hello@andrabgallery.com">Email</a>
+    </div>
+  </div>
+  <div class="footer-base">
+    <div class="footer-legal-copy">&copy; 2026 Andrab Gallery &middot; Kashmir Shawl Co., Dubai</div>
+    <div class="footer-legal-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+  </div>
 </footer>
 
 <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
