@@ -39,7 +39,7 @@
 
   /* NAV */
   nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 20px 60px; display: flex; align-items: center; justify-content: space-between; background: rgba(253,250,246,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(184,149,90,0.15); }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--burgundy); text-decoration: none; z-index: 1001; }
+  .nav-logo { text-decoration: none; z-index: 1001; display: flex; align-items: center; }
   .nav-links { display: flex; gap: 40px; list-style: none; }
   .nav-links a { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--charcoal); text-decoration: none; transition: color 0.3s; }
   .nav-links a:hover, .nav-links a.active { color: var(--gold); }
@@ -66,7 +66,8 @@
   .page-desc { font-size: 15px; line-height: 1.9; color: var(--muted); max-width: 420px; align-self: end; }
 
   /* FILTER BAR */
-  .filter-section { position: sticky; top: 72px; background: rgba(253,250,246,0.97); backdrop-filter: blur(12px); z-index: 100; border-bottom: 1px solid rgba(184,149,90,0.15); }
+  .filter-section { background: rgba(253,250,246,0.97); z-index: 999; border-bottom: 1px solid rgba(184,149,90,0.15); }
+.filter-topbar { position: sticky; top: 93px; background: rgba(253,250,246,0.97); backdrop-filter: blur(12px); z-index: 999; }
 
   /* TOP BAR — always visible one line */
   .filter-topbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 80px; cursor: pointer; user-select: none; }
@@ -100,33 +101,43 @@
   /* GRID */
   .collection-section { padding: 48px 80px 100px; }
 
-  /* GENDER TABS */
-  .gender-tabs { display: flex; gap: 48px; padding: 32px 80px 18px; align-items: flex-end; border-bottom: 2px solid rgba(184,149,90,0.2); }
-  .gender-tab { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 64px); font-weight: 600; color: var(--muted); background: none; border: none; cursor: pointer; padding: 0 0 14px; position: relative; letter-spacing: 0.5px; line-height: 1; transition: color 0.3s; }
-  .gender-tab.active { color: var(--burgundy); }
-  .gender-tab.active::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 3px; background: var(--burgundy); }
-  .gender-tab:hover { color: var(--deep-rose); }
+  /* ===== GENDER ENTRY CARDS ===== */
+  .gender-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; min-height: 540px; }
+  .gender-card {
+    position: relative; overflow: hidden; cursor: pointer; border: none; padding: 0; margin: 0;
+    background: none; font-family: inherit; display: block; min-height: 540px;
+  }
+  .gender-card-img { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.8s ease; }
+  .gender-card:hover .gender-card-img { transform: scale(1.05); }
+  /* gradient placeholders — replace via GENDER_CARD_IMAGES in the script below */
+  .gender-card-women .gender-card-img { background-color: #c8a88a; background-image: linear-gradient(160deg, #e8d5c4 0%, #c4907a 55%, #8b5a47 100%); }
+  .gender-card-men .gender-card-img { background-color: #6a5040; background-image: linear-gradient(160deg, #7a5538 0%, #4a2a1c 60%, #2c2420 100%); }
+  .gender-card-overlay {
+    position: absolute; inset: 0; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+    background: linear-gradient(to top, rgba(28,16,10,0.55) 0%, rgba(28,16,10,0.12) 55%, rgba(28,16,10,0.25) 100%);
+    transition: background 0.4s;
+  }
+  .gender-card:hover .gender-card-overlay { background: linear-gradient(to top, rgba(28,16,10,0.42) 0%, rgba(28,16,10,0.06) 55%, rgba(28,16,10,0.18) 100%); }
+  .gender-card-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--light-gold); }
+  .gender-card-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(44px, 6vw, 84px); font-weight: 300; color: var(--warm-white); line-height: 1; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+  .gender-card-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--warm-white);
+    border: 1px solid rgba(253,250,246,0.6); padding: 13px 30px; transition: all 0.3s; margin-top: 6px;
+  }
+  .gender-card:hover .gender-card-cta { background: var(--warm-white); color: var(--charcoal); border-color: var(--warm-white); }
 
-  /* LEVEL 2 — CATEGORY TILES */
-  .category-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 44px 80px 100px; }
-  .cat-tile { position: relative; aspect-ratio: 4/3; border: none; padding: 0; margin: 0; cursor: pointer; overflow: hidden; background: none; font-family: inherit; display: block; }
-  .cat-tile-img { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.6s ease; }
-  #tile-img-gi { background: linear-gradient(150deg, var(--light-gold), var(--gold), var(--deep-rose)); }
-  #tile-img-nongi { background: linear-gradient(150deg, var(--blush), var(--deep-rose), var(--burgundy)); }
-  .cat-tile:hover .cat-tile-img { transform: scale(1.05); }
-  .cat-tile-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: linear-gradient(to top, rgba(44,36,32,0.55), rgba(44,36,32,0.12)); transition: background 0.3s; }
-  .cat-tile:hover .cat-tile-overlay { background: linear-gradient(to top, rgba(44,36,32,0.62), rgba(44,36,32,0.22)); }
-  .cat-tile-label { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 48px); font-weight: 500; color: var(--warm-white); display: inline-flex; align-items: center; gap: 12px; text-shadow: 0 2px 14px rgba(0,0,0,0.35); }
-  .cat-tile-cta { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--warm-white); border-bottom: 1px solid rgba(255,255,255,0.6); padding-bottom: 4px; }
+  /* shop view (hidden until a card is chosen) */
+  .shop-view { display: none; }
+  .shop-view.active { display: block; }
 
-  /* LEVEL 3 — DRILL-DOWN BAR + HEADING */
-  .topbar-left { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-  .drill-back { font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--warm-white); background: var(--burgundy); border: none; cursor: pointer; padding: 8px 16px; transition: background 0.3s; }
-  .drill-back:hover { background: var(--deep-rose); }
-  .grid-heading-wrap { display: flex; align-items: center; gap: 18px; margin-bottom: 32px; }
-  .grid-heading-wrap::after { content: ''; flex: 1; height: 1px; background: rgba(184,149,90,0.4); }
-  .subsection-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 3vw, 38px); font-weight: 500; color: var(--burgundy); white-space: nowrap; display: inline-flex; align-items: center; gap: 11px; }
-  .gi-seal { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--light-gold)); color: #fff; font-size: 13px; }
+  /* back + heading row */
+  .shop-bar { display: flex; align-items: center; gap: 20px; padding: 28px 80px 0; }
+  .shop-back { display: inline-flex; align-items: center; gap: 9px; font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--burgundy); background: none; border: 1px solid rgba(184,149,90,0.4); cursor: pointer; padding: 10px 18px; transition: all 0.3s; }
+  .shop-back:hover { background: var(--burgundy); color: var(--warm-white); border-color: var(--burgundy); }
+  .shop-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 3vw, 40px); font-weight: 400; color: var(--burgundy); line-height: 1; }
+  .shop-heading em { font-style: italic; }
 
   .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 24px; }
   .product-card { opacity: 1; transition: opacity 0.4s, box-shadow 0.3s, transform 0.3s; border-radius: 2px; cursor: pointer; }
@@ -247,9 +258,9 @@
   .back-to-top.visible { opacity: 1; pointer-events: all; }
   .back-to-top:hover { transform: translateY(-3px); }
 
-  .wa-float { position: fixed; bottom: 28px; right: 28px; z-index: 9999; background: #25D366; color: white; padding: 14px 20px; border-radius: 50px; text-decoration: none; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.3s, box-shadow 0.3s; }
+  .wa-float { position: fixed; bottom: 28px; right: 28px; z-index: 100; background: #25D366; width: 58px; height: 58px; border-radius: 50%; text-decoration: none; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.3s, box-shadow 0.3s; }
   .wa-float:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(37,211,102,0.5); }
-  .wa-float-icon { font-size: 18px; }
+  .wa-float svg { width: 30px; height: 30px; }
 
   footer { background: var(--charcoal); padding: 40px 80px; display: flex; align-items: center; justify-content: space-between; }
   .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 17px; letter-spacing: 3px; text-transform: uppercase; color: var(--light-gold); }
@@ -264,16 +275,16 @@
     .nav-whatsapp { display: none; }
     .hamburger { display: flex; }
     .page-header { grid-template-columns: 1fr; padding: 100px 20px 48px; gap: 24px; }
-    .filter-section { top: 60px; }
+    .filter-section { top: 93px; }
     .filter-topbar { padding: 12px 20px; }
     .filter-body { padding: 16px 20px 20px; flex-direction: column; gap: 20px; }
     .search-group { min-width: 100%; }
     .sort-select { min-width: 100%; }
     .collection-section { padding: 32px 20px 72px; }
-    .gender-tabs { padding: 24px 20px 12px; gap: 28px; }
-    .category-tiles { grid-template-columns: 1fr; gap: 16px; padding: 28px 20px 72px; }
-    .cat-tile { aspect-ratio: 16/10; }
-    .grid-heading-wrap { margin-bottom: 22px; gap: 14px; }
+    .gender-cards { grid-template-columns: 1fr; gap: 14px; min-height: 0; }
+    .gender-card, .gender-card-men, .gender-card-women { min-height: 300px; }
+    .gender-card-overlay { gap: 14px; }
+    .shop-bar { padding: 20px 20px 0; gap: 14px; flex-wrap: wrap; }
     .products-grid { grid-template-columns: 1fr 1fr; gap: 20px 12px; }
     .carousel { aspect-ratio: 2/3; }
     .loading { grid-template-columns: 1fr 1fr; gap: 20px 12px; }
@@ -298,7 +309,9 @@
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">Andrab Gallery</a>
+  <a href="index.html" class="nav-logo">
+  <img src="logo.png" alt="Andrab Gallery" style="height: 60px; width: auto; display: block;">
+</a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="collection.html" class="active">Collection</a></li>
@@ -367,91 +380,114 @@
   <p class="page-desc">Every piece is sourced directly from master craftsmen across Kashmir. Each shawl carries a story of patience, skill, and generations of tradition.</p>
 </div>
 
-<div class="gender-tabs">
-  <button class="gender-tab active" data-gender="women">Women</button>
-  <button class="gender-tab" data-gender="men">Men</button>
+<!-- ===== ENTRY CARDS ===== -->
+<div class="gender-cards" id="gender-cards">
+  <button class="gender-card gender-card-women" data-gender="women" aria-label="Shop Women's collection">
+    <div class="gender-card-img" id="img-women"></div>
+    <div class="gender-card-overlay">
+      <div class="gender-card-label">For Her</div>
+      <div class="gender-card-title">Women</div>
+      <span class="gender-card-cta">Explore →</span>
+    </div>
+  </button>
+  <button class="gender-card gender-card-men" data-gender="men" aria-label="Shop Men's collection">
+    <div class="gender-card-img" id="img-men"></div>
+    <div class="gender-card-overlay">
+      <div class="gender-card-label">For Him</div>
+      <div class="gender-card-title">Men</div>
+      <span class="gender-card-cta">Explore →</span>
+    </div>
+  </button>
 </div>
 
-<div class="filter-section" id="filter-section">
-  <div class="filter-topbar" id="filter-topbar">
-    <div class="topbar-left">
-      <button class="filter-toggle" id="filter-toggle">⊕ Filter &amp; Sort <span class="filter-toggle-arrow">▼</span></button>
-      <div class="filter-active-tags" id="filter-active-tags"></div>
-    </div>
-    <div class="results-count">Showing <span id="count">0</span> pieces</div>
+<!-- ===== SHOP VIEW (hidden until a card is chosen) ===== -->
+<div class="shop-view" id="shop-view">
+  <div class="shop-bar">
+    <button class="shop-back" id="shop-back">← All Categories</button>
+    <div class="shop-heading" id="shop-heading">Women's <em>Collection</em></div>
   </div>
 
-  <div class="filter-body" id="filter-body">
-    <div class="filter-group">
-      <div class="filter-label">Fabric</div>
-      <div class="filter-buttons" id="type-filters">
-        <button class="filter-btn active" data-type="all">All</button>
-        <button class="filter-btn" data-type="pashmina">Pashmina</button>
-        <button class="filter-btn" data-type="cashmere">Cashmere</button>
+  <div class="filter-section" id="filter-section">
+    <div class="filter-topbar" id="filter-topbar">
+      <div class="topbar-left">
+        <button class="filter-toggle" id="filter-toggle">⊕ Filter &amp; Sort <span class="filter-toggle-arrow">▼</span></button>
+        <div class="filter-active-tags" id="filter-active-tags"></div>
       </div>
+      <div class="results-count">Showing <span id="count">0</span> pieces</div>
     </div>
-    <div class="filter-group">
-      <div class="filter-label">Craft</div>
-      <div class="filter-buttons" id="craft-filters">
-        <button class="filter-btn active" data-craft="all">All</button>
-        <button class="filter-btn" data-craft="kani">Kani</button>
-        <button class="filter-btn" data-craft="sozni">Sozni</button>
-        <button class="filter-btn" data-craft="tilla">Tilla</button>
-        <button class="filter-btn" data-craft="jamawar">Jamawar</button>
-        <button class="filter-btn" data-craft="plain">Plain</button>
+
+    <div class="filter-body" id="filter-body">
+      <div class="filter-group">
+        <div class="filter-label">Fabric</div>
+        <div class="filter-buttons" id="type-filters">
+          <button class="filter-btn active" data-type="all">All</button>
+          <button class="filter-btn" data-type="pashmina">Pashmina</button>
+          <button class="filter-btn" data-type="cashmere">Cashmere</button>
+        </div>
       </div>
-    </div>
-    <div class="filter-group">
-      <div class="filter-label">Size</div>
-      <div class="filter-buttons" id="size-filters">
-        <button class="filter-btn active" data-size="all">All Sizes</button>
-        <button class="filter-btn" data-size="small">Small</button>
-        <button class="filter-btn" data-size="medium">Medium</button>
-        <button class="filter-btn" data-size="large">Large</button>
-        <button class="filter-btn" data-size="shawl">Full Shawl</button>
+      <div class="filter-group">
+        <div class="filter-label">Craft</div>
+        <div class="filter-buttons" id="craft-filters">
+          <button class="filter-btn active" data-craft="all">All</button>
+          <button class="filter-btn" data-craft="kani">Kani</button>
+          <button class="filter-btn" data-craft="sozni">Sozni</button>
+          <button class="filter-btn" data-craft="tilla">Tilla</button>
+          <button class="filter-btn" data-craft="jamawar">Jamawar</button>
+          <button class="filter-btn" data-craft="plain">Plain</button>
+        </div>
       </div>
-    </div>
-    <div class="filter-group">
-      <div class="filter-label">Show</div>
-      <div class="filter-buttons" id="special-filters">
-        <button class="filter-btn active" data-special="all">All</button>
-        <button class="filter-btn" data-special="rare">Rare</button>
-        <button class="filter-btn" data-special="exclusive">Exclusive</button>
-        <button class="filter-btn" data-special="new">New</button>
+      <div class="filter-group">
+        <div class="filter-label">Size</div>
+        <div class="filter-buttons" id="size-filters">
+          <button class="filter-btn active" data-size="all">All Sizes</button>
+          <button class="filter-btn" data-size="small">Small</button>
+          <button class="filter-btn" data-size="medium">Medium</button>
+          <button class="filter-btn" data-size="large">Large</button>
+          <button class="filter-btn" data-size="shawl">Full Shawl</button>
+        </div>
       </div>
-    </div>
-    <div class="search-group">
-      <div class="filter-label">Search</div>
-      <input type="text" id="search-input" placeholder="Search by name, type, material..." class="search-input">
-    </div>
-    <div class="sort-group">
-      <div class="filter-label">Sort By</div>
-      <select class="sort-select" id="sort-select">
-        <option value="default">Default</option>
-        <option value="price-low">Price: Low to High</option>
-        <option value="price-high">Price: High to Low</option>
-        <option value="name-az">Name: A–Z</option>
-      </select>
+      <div class="filter-group">
+        <div class="filter-label">Show</div>
+        <div class="filter-buttons" id="special-filters">
+          <button class="filter-btn active" data-special="all">All</button>
+          <button class="filter-btn" data-special="rare">Rare</button>
+          <button class="filter-btn" data-special="exclusive">Exclusive</button>
+          <button class="filter-btn" data-special="new">New</button>
+        </div>
+      </div>
+      <div class="search-group">
+        <div class="filter-label">Search</div>
+        <input type="text" id="search-input" placeholder="Search by name, type, material..." class="search-input">
+      </div>
+      <div class="sort-group">
+        <div class="filter-label">Sort By</div>
+        <select class="sort-select" id="sort-select">
+          <option value="default">Default</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="name-az">Name: A–Z</option>
+        </select>
+      </div>
     </div>
   </div>
+
+  <section class="collection-section">
+    <div class="loading" id="loading" style="display:none;">
+      <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
+      <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
+      <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
+    </div>
+    <div class="products-grid" id="products-grid"></div>
+    <div class="no-results" id="no-results">
+      <div class="no-results-title">No pieces found</div>
+      <p class="no-results-text">Try a different filter or <a href="https://wa.me/971507696817" style="color:var(--burgundy);">contact us directly</a>.</p>
+    </div>
+    <div class="error-state" id="error-state">
+      <div class="no-results-title">Could not load collection</div>
+      <p class="no-results-text">Please refresh or <a href="https://wa.me/971507696817" style="color:var(--burgundy);">WhatsApp us</a>.</p>
+    </div>
+  </section>
 </div>
-
-<section class="collection-section">
-  <div class="loading" id="loading" style="display:none;">
-    <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
-    <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
-    <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
-  </div>
-  <div class="products-grid" id="products-grid"></div>
-  <div class="no-results" id="no-results">
-    <div class="no-results-title">No pieces found</div>
-    <p class="no-results-text">Try a different filter or <a href="https://wa.me/971507696817" style="color:var(--burgundy);">contact us directly</a>.</p>
-  </div>
-  <div class="error-state" id="error-state">
-    <div class="no-results-title">Could not load collection</div>
-    <p class="no-results-text">Please refresh or <a href="https://wa.me/971507696817" style="color:var(--burgundy);">WhatsApp us</a>.</p>
-  </div>
-</section>
 
 
 <div class="cta-banner">
@@ -472,17 +508,24 @@
 
 <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
 
-<a href="https://wa.me/971507696817?text=Hello%2C%20I%27d%20like%20to%20enquire%20about%20your%20Kashmiri%20shawls." class="wa-float" target="_blank">
-  <span class="wa-float-icon">💬</span>
-  WhatsApp Us
+<a href="https://wa.me/971507696817?text=Hello%2C%20I%27d%20like%20to%20enquire%20about%20your%20Kashmiri%20shawls." class="wa-float" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.128 6.744 3.046 9.378L1.05 31.314l6.142-1.964A15.9 15.9 0 0 0 16.004 32C24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.31 22.594c-.386 1.09-1.918 1.994-3.14 2.258-.836.178-1.928.32-5.602-1.204-4.7-1.946-7.726-6.722-7.962-7.032-.226-.31-1.9-2.53-1.9-4.826s1.166-3.42 1.636-3.9c.386-.394.836-.574 1.116-.574.14 0 .266.006.38.012.328.014.492.034.708.55.27.642.93 2.226 1.008 2.39.08.164.16.39.052.61-.1.224-.188.322-.352.51-.164.188-.32.332-.484.534-.15.176-.32.366-.13.692.19.32.844 1.39 1.812 2.252 1.25 1.114 2.286 1.46 2.65 1.612.27.112.59.086.812-.16.282-.314.63-.836.984-1.35.252-.366.57-.412.904-.286.34.118 2.156 1.018 2.526 1.202.37.184.616.272.708.426.09.156.09.886-.296 1.976z"/>
+  </svg>
 </a>
 
 <script>
 const SHEET_ID = '119pVriCZZy74IZ3zrR-pnLtm5y3XZRYixoWJ3DNKVHI';
 const API_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
+// ===== OPTIONAL: drop real cover photo URLs here to replace the gradient placeholders =====
+const GENDER_CARD_IMAGES = {
+  women: '',   // e.g. 'images/women-cover.jpg'  (or a full https:// link)
+  men:   ''    // e.g. 'images/men-cover.jpg'
+};
+
 let allProducts = [];
-let activeGender = 'women';
+let activeGender = null;   // null = on entry screen; 'women' or 'men' = inside a section
 let activeType = 'all';
 let activeCraft = 'all';
 let activeSize = 'all';
@@ -605,14 +648,40 @@ function sortProducts(arr) {
   return sorted;
 }
 
-// ---- GENDER TABS ----
-function setGender(g) {
+// ===== ENTRY <-> SHOP NAVIGATION =====
+function resetFilterButtons() {
+  document.querySelectorAll('#type-filters .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.type === 'all'));
+  document.querySelectorAll('#craft-filters .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.craft === 'all'));
+  document.querySelectorAll('#size-filters .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.size === 'all'));
+  document.querySelectorAll('#special-filters .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.special === 'all'));
+}
+
+function enterSection(g) {
   activeGender = g;
-  document.querySelectorAll('.gender-tab').forEach(t => t.classList.toggle('active', t.dataset.gender === g));
+  // reset all filters fresh each time you enter a section
+  activeType = 'all'; activeCraft = 'all'; activeSize = 'all'; activeSpecial = 'all'; activeSort = 'default';
+  resetFilterButtons();
+  document.getElementById('search-input').value = '';
+  document.getElementById('sort-select').value = 'default';
+  document.getElementById('filter-toggle').classList.remove('open');
+  document.getElementById('filter-body').classList.remove('open');
+
+  document.getElementById('shop-heading').innerHTML = g === 'men' ? "Men's <em>Collection</em>" : "Women's <em>Collection</em>";
+  document.getElementById('gender-cards').style.display = 'none';
+  document.getElementById('shop-view').classList.add('active');
+  window.scrollTo({ top: 0 });
   render();
 }
 
+function backToEntry() {
+  activeGender = null;
+  document.getElementById('shop-view').classList.remove('active');
+  document.getElementById('gender-cards').style.display = 'grid';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function render() {
+  if (!activeGender) return;  // on entry screen there is nothing to render
   const grid = document.getElementById('products-grid');
   grid.querySelectorAll('.product-card').forEach(c => c.remove());
   const noResults = document.getElementById('no-results');
@@ -827,16 +896,8 @@ function updateActiveTags() {
 
 // BACK TO TOP
 const backBtn = document.getElementById('back-to-top');
-let lastScrollY = window.scrollY;
 window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  backBtn.classList.toggle('visible', y > 400);
-  // Collapse the open filter panel back to a single line when scrolling down to browse
-  if (y > lastScrollY + 4 && filterBody.classList.contains('open')) {
-    filterToggle.classList.remove('open');
-    filterBody.classList.remove('open');
-  }
-  lastScrollY = y;
+  backBtn.classList.toggle('visible', window.scrollY > 400);
 });
 backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
@@ -866,8 +927,20 @@ async function load() {
     loadFailed = true;
     console.error(err);
   }
-  render();
+  if (activeGender) render();   // re-render only if user has already entered a section
 }
+
+// ===== ENTRY CARD CLICKS =====
+document.querySelectorAll('.gender-card').forEach(card => {
+  card.addEventListener('click', () => enterSection(card.dataset.gender));
+});
+document.getElementById('shop-back').addEventListener('click', backToEntry);
+
+// apply optional cover photos to the entry cards
+(function applyCardImages() {
+  if (GENDER_CARD_IMAGES.women) document.getElementById('img-women').style.backgroundImage = `url('${GENDER_CARD_IMAGES.women}')`;
+  if (GENDER_CARD_IMAGES.men)   document.getElementById('img-men').style.backgroundImage   = `url('${GENDER_CARD_IMAGES.men}')`;
+})();
 
 document.querySelectorAll('#type-filters .filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -894,10 +967,6 @@ document.querySelectorAll('#size-filters .filter-btn').forEach(btn => {
     activeSize = btn.dataset.size;
     render();
   });
-});
-
-document.querySelectorAll('.gender-tab').forEach(tab => {
-  tab.addEventListener('click', () => setGender(tab.dataset.gender));
 });
 
 document.querySelectorAll('#special-filters .filter-btn').forEach(btn => {
