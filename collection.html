@@ -67,7 +67,7 @@
 
   /* FILTER BAR */
   .filter-section { background: rgba(253,250,246,0.97); z-index: 999; border-bottom: 1px solid rgba(184,149,90,0.15); }
-.filter-topbar { position: sticky; top: 93px; background: rgba(253,250,246,0.97); backdrop-filter: blur(12px); z-index: 999; }
+.filter-topbar { position: sticky; top: 93px; background: rgba(253,250,246,0.97); backdrop-filter: blur(12px); z-index: 98; }
 
   /* TOP BAR — always visible one line */
   .filter-topbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 80px; cursor: pointer; user-select: none; }
@@ -160,7 +160,7 @@
   .carousel-enquire-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 18px; background: linear-gradient(transparent, rgba(44,36,32,0.9)); opacity: 0; transition: opacity 0.4s; z-index: 5; }
   .carousel:hover .carousel-enquire-overlay { opacity: 1; }
   .card-enquire-btn { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--warm-white); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.5); padding-bottom: 3px; }
-  .card-badge { position: absolute; top: 14px; left: 14px; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 12px; z-index: 10; }
+  .card-badge { position: absolute; top: 8px; left: 8px; font-size: 7px; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 7px; z-index: 10; white-space: nowrap; }
   .card-badge.new { background: var(--burgundy); color: var(--warm-white); }
   .card-badge.exclusive { background: var(--gold); color: var(--warm-white); }
   .card-badge.rare { background: var(--charcoal); color: var(--light-gold); }
@@ -302,6 +302,18 @@
     footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 20px; }
     .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
     .back-to-top { bottom: 90px; right: 20px; }
+    /* Mobile: shrink badges */
+    .card-badge { font-size: 7px; letter-spacing: 1px; padding: 2px 5px; top: 6px; left: 6px; }
+    .gi-badge { font-size: 7px; letter-spacing: 1px; padding: 2px 5px; top: 6px; right: 6px; }
+    /* Mobile: hide hover overlay entirely (touch devices = always visible = bad UX) */
+    .carousel-enquire-overlay { display: none; }
+    /* Mobile: tighten card footer */
+    .card-footer { padding-top: 10px; }
+    .card-price { font-size: 13px; }
+    .card-whatsapp { font-size: 9px; letter-spacing: 1px; }
+    .card-meta { margin-bottom: 4px; }
+    .card-name { font-size: 14px; margin-bottom: 4px; }
+    .card-material { font-size: 11px; margin-bottom: 6px; }
   }
   @media (max-width: 400px) { .products-grid { grid-template-columns: 1fr 1fr; gap: 12px 8px; } .loading { grid-template-columns: 1fr 1fr; } .carousel { aspect-ratio: 4/3; } .card-name { font-size: 13px; } .card-material, .card-desc { display: none; } }
 </style>
@@ -623,7 +635,7 @@ function buildCard(p, mini = false, idx = null) {
         <a href="${wa}" class="card-enquire-btn" target="_blank">Enquire on WhatsApp →</a>
       </div>
     </div>
-    <div>
+    <div style="padding: 0 14px 14px;">
       <div class="card-meta">
         <span class="card-type">${typeLabel}</span>
         <span class="card-size">${p.size || ''}</span>
