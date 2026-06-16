@@ -34,7 +34,8 @@ export default async function handler(req, res) {
         whatsapp_number: p['WhatsApp']?.rich_text?.[0]?.plain_text || '',
         gender:          p['Gender']?.select?.name || '',
         gi_certified:    p['GI Certified']?.checkbox || false,
-        craft:           p['Craft']?.rich_text?.[0]?.plain_text || ''
+        craft:           p['Craft']?.rich_text?.[0]?.plain_text || '',
+        featured:        p['Featured']?.checkbox || false
       };
     }).filter(p => p.name.trim() !== '');
 
