@@ -515,8 +515,7 @@
 </a>
 
 <script>
-const SHEET_ID = '119pVriCZZy74IZ3zrR-pnLtm5y3XZRYixoWJ3DNKVHI';
-const API_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+const API_URL = 'https://andrabgallery.vercel.app/api/collection';
 
 // ===== OPTIONAL: drop real cover photo URLs here to replace the gradient placeholders =====
 const GENDER_CARD_IMAGES = {
@@ -904,30 +903,13 @@ backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smo
 async function load() {
   try {
     const res = await fetch(API_URL);
-    const text = await res.text();
-    const clean = text.replace(/^[^{]*/, '').replace(/[^}]*$/, '');
-    const json = JSON.parse(clean);
-    allProducts = (json.table.rows || []).slice(0).map(row => ({
-      name:            row.c[0]?.v || '',
-      type:            row.c[1]?.v || '',
-      size:            row.c[2]?.v || '',
-      price:           String(row.c[3]?.v || ''),
-      material:        row.c[4]?.v || '',
-      description:     row.c[5]?.v || '',
-      image_url:       row.c[6]?.v || '',
-      badge:           row.c[7]?.v || '',
-      whatsapp_number: String(row.c[8]?.v || ''),
-      image_url_2:     row.c[9]?.v || '',
-      image_url_3:     row.c[10]?.v || '',
-      gender:          row.c[11]?.v || '',
-      gi_certified:    row.c[12]?.v || '',
-      craft:           row.c[13]?.v || ''
-    })).filter(p => p.name.trim() !== '');
+    const products = await res.json();
+    allProducts = products.filter(p => p.name && p.name.trim() !== '' && p.name !== '+');
   } catch (err) {
     loadFailed = true;
     console.error(err);
   }
-  if (activeGender) render();   // re-render only if user has already entered a section
+  if (activeGender) render();
 }
 
 // ===== ENTRY CARD CLICKS =====
